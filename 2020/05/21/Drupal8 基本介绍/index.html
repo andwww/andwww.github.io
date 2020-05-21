@@ -143,7 +143,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    1.8k 字
+                    1.9k 字
                   </span>
                 
 
@@ -153,7 +153,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    20
+                    21
                      分钟
                   </span>
                 
@@ -216,7 +216,7 @@
 ├── composer.json
 ├── composer.lock
 ├── core                                            &#x2F;&#x2F; Drupal8 核心代码
-│   ├── assets
+│   ├── assets                                      &#x2F;&#x2F; Drupal8 - 所使用的各种扩展库
 │   ├── authorize.php
 │   ├── CHANGELOG.txt
 │   ├── composer.json
@@ -228,47 +228,48 @@
 │   ├── core.services.yml
 │   ├── drupalci.yml
 │   ├── globals.api.php
-│   ├── includes
+│   ├── includes                                   &#x2F;&#x2F; Drupal8 - 模块化的底层功能函数，如模块化系统本身
 │   ├── INSTALL.mysql.txt
 │   ├── INSTALL.pgsql.txt
 │   ├── install.php
 │   ├── INSTALL.sqlite.txt
 │   ├── INSTALL.txt
-│   ├── lib
+│   ├── lib                                        &#x2F;&#x2F; Drupal8 - 各种核心类（classes）
 │   ├── LICENSE.txt
 │   ├── MAINTAINERS.txt
 │   ├── misc
-│   ├── modules                                    &#x2F;&#x2F; Drupal8 系统核心模块
+│   ├── modules                                    &#x2F;&#x2F; Drupal8 - 系统核心模块
 │   ├── package.json
 │   ├── phpcs.xml.dist
 │   ├── phpunit.xml.dist
-│   ├── profiles
+│   ├── profiles                                   &#x2F;&#x2F; Drupal8 - 内置安装配置文件
 │   ├── rebuild.php
-│   ├── scripts
-│   ├── tests
-│   ├── themes                                     &#x2F;&#x2F; Drupal8 系统核心主题
+│   ├── scripts                                    &#x2F;&#x2F; Drupal8 - 开发人员可用的各种命令行脚本
+│   ├── tests                                      &#x2F;&#x2F; Drupal8 - 测试用相关文件
+│   ├── themes                                     &#x2F;&#x2F; Drupal8 - 系统核心主题
 │   ├── UPDATE.txt
 │   └── yarn.lock
 ├── example.gitignore
 ├── index.php
 ├── INSTALL.txt
 ├── LICENSE.txt
-├── modules                                        &#x2F;&#x2F; Drupal8 模块安装文件
+├── modules                                        &#x2F;&#x2F; Drupal8 - 贡献模块与自定义模块存放位置
 │   └── README.txt
 ├── profiles
 │   └── README.txt
 ├── README.txt
 ├── robots.txt
-├── sites
+├── sites                                          &#x2F;&#x2F; Drupal8 - 在多站点情况下，放置 [default|all|domain]&#x2F;[modules|themes|files]
 │   ├── default
 │   ├── development.services.yml
 │   ├── example.settings.local.php
 │   ├── example.sites.php
 │   └── README.txt
-├── themes                                         &#x2F;&#x2F; Drupal8 主题安装文件
+├── themes                                         &#x2F;&#x2F; Drupal8 - 贡献主题或自定义主题
 │   └── README.txt
 ├── update.php
-└── web.config</code></pre>
+└── web.config
+└── vendor                                         &#x2F;&#x2F; Drupal8 - 核心所需要的第三方库，如 Symfony2, Twig 等</code></pre>
 
 <h4 id="基本术语介绍"><a href="#基本术语介绍" class="headerlink" title="基本术语介绍"></a>基本术语介绍</h4><ul>
 <li>节点(node)</li>
