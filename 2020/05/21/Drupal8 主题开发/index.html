@@ -143,7 +143,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    2.7k 字
+                    3.6k 字
                   </span>
                 
 
@@ -153,7 +153,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    33
+                    46
                      分钟
                   </span>
                 
@@ -443,7 +443,181 @@ new_library:
     - my_module&#x2F;my_library
     - my_theme&#x2F;my_library</code></pre>
 
+<ul>
+<li>声明全局库文件</li>
+</ul>
+<p>大多数主题使用一些全局样式资源库，需要在激活该主题的每个页面上加载的样式表（CSS文件）。一些全局js 资源库也是一样，需要在激活该主题的每个页面上加载js资源库。</p>
+<pre><code class="hljs plain"># fluffiness.libraries.yml (multiple libraries can be added to a libraries.yml file, these would appear below the cuddly-slider libraries added earlier)
+global-styling:
+  version: 1.x
+  css:
+    theme:
+      css&#x2F;layout.css: &#123;&#125;
+      css&#x2F;style.css: &#123;&#125;
+      css&#x2F;colors.css: &#123;&#125;
+global-scripts:
+  version: 1.x
+  js: 
+    js&#x2F;navmenu.js: &#123;&#125;</code></pre>
 
+<p>将global-style / global-scripts库添加到 <strong>主题名.libraries.yml</strong> 文件libraries中：</p>
+<pre><code class="hljs plain">#fluffiness.info.yml
+name: Fluffiness
+type: theme
+description: &#39;A cuddly theme that offers extra fluffiness.&#39;
+core: 8.x
+# by adding global-styling and global-scripts here, the css&#x2F;js files in the library become 
+# available to every page presented by the theme
+libraries:
+  - fluffiness&#x2F;global-styling
+  - fluffiness&#x2F;global-scripts
+base theme: classy
+regions:
+  header: Header
+  content: Content
+  sidebar_first: &#39;Sidebar first&#39;
+  footer: Footer</code></pre>
+
+<h4 id="定义库：选项和详细信息"><a href="#定义库：选项和详细信息" class="headerlink" title="定义库：选项和详细信息"></a>定义库：选项和详细信息</h4><p>以下属性是可选的，并且按CSS资产应用。</p>
+<blockquote>
+<p>CSS相关属性</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>描述</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attributes</td>
+<td>可选属性。已知用例引导CDN。</td>
+<td>{ attributes: { crossorigin: anonymous } }</td>
+</tr>
+<tr>
+<td>browsers</td>
+<td>基于浏览器有条件地加载资源。<br> 注意，这个方法使用了条件注释，这在IE10及以上版本中是不支持的.</td>
+<td>{ browsers: { IE: ‘lte IE 9’, ‘!IE’: false } }</td>
+</tr>
+<tr>
+<td>group</td>
+<td>按组汇总资源。<br> 默认值:资产所在的SMACSS组。</td>
+<td>很少使用</td>
+</tr>
+<tr>
+<td>media</td>
+<td>媒体类型.</td>
+<td>{ media: print }</td>
+</tr>
+<tr>
+<td>minified</td>
+<td>资源是否已经压缩.<br>Default: false</td>
+<td>{ type: external, minified: true }</td>
+</tr>
+<tr>
+<td>preprocess</td>
+<td>是否应该聚合资源.<br>Default: true</td>
+<td>{ preprocess: false }</td>
+</tr>
+<tr>
+<td>type</td>
+<td>资源的来源.<br>Default: file</td>
+<td>{ type: external, minified: true }</td>
+</tr>
+<tr>
+<td>weight</td>
+<td>调整相对于其他资源的顺序(在同一个SMACSS组中).<br>Default: 0. Use a numeric between -50 to +50.</td>
+<td>{ weight: 1 }</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>JS 相关属性</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>描述</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attributes</td>
+<td>额外的脚本属性。</td>
+<td>{ type: external, attributes: { async: true } }</td>
+</tr>
+<tr>
+<td>browsers</td>
+<td>基于浏览器有条件地加载资源。注意，这个方法使用了条件注释，这在IE10及以上版本中是不支持的.</td>
+<td>{ browsers: { IE: ‘lte IE 9’, ‘!IE’: false } }</td>
+</tr>
+<tr>
+<td>preprocess</td>
+<td>是否应该聚合资源。<br>Default: true</td>
+<td>{ preprocess: false }</td>
+</tr>
+<tr>
+<td>type</td>
+<td>资源的来源<br> Default: file</td>
+<td>{ type: external, minified: true }</td>
+</tr>
+<tr>
+<td>weight</td>
+<td>不鼓励使用依赖项。<br>调整相对于其他资产的顺序。必须是负的</td>
+<td>{ weight: -1 }</td>
+</tr>
+</tbody></table>
+<h4 id="CDN-外部托管库"><a href="#CDN-外部托管库" class="headerlink" title="CDN /外部托管库"></a>CDN /外部托管库</h4><ul>
+<li>例</li>
+</ul>
+<pre><code class="hljs plain">angular.angularjs:
+  remote: https:&#x2F;&#x2F;github.com&#x2F;angular
+  version: 1.4.4
+  license:
+    name: MIT
+    url: https:&#x2F;&#x2F;github.com&#x2F;angular&#x2F;angular.js&#x2F;blob&#x2F;master&#x2F;LICENSE
+    gpl-compatible: true
+  js:
+    https:&#x2F;&#x2F;ajax.googleapis.com&#x2F;ajax&#x2F;libs&#x2F;angularjs&#x2F;1.4.4&#x2F;angular.min.js: &#123; type: external, minified: true &#125;</code></pre>
+
+<blockquote>
+<p>如果希望使用与请求页面相同的协议来请求外部文件，请指定相对于协议的URL：</p>
+</blockquote>
+<pre><code class="hljs plain">js:
+   &#x2F;&#x2F;ajax.googleapis.com&#x2F;ajax&#x2F;libs&#x2F;angularjs&#x2F;1.4.4&#x2F;angular.min.js: &#123; type: external, minified: true &#125;</code></pre>
+
+<blockquote>
+<p>或者，如果您想添加CSS，下面是集成Font Awesome的示例：</p>
+</blockquote>
+<pre><code class="hljs plain">font-awesome:
+  remote: https:&#x2F;&#x2F;fortawesome.github.io&#x2F;Font-Awesome&#x2F;
+  version: 4.5.0
+  license:
+    name: MIT
+    url: https:&#x2F;&#x2F;fortawesome.github.io&#x2F;Font-Awesome&#x2F;license&#x2F;
+    gpl-compatible: true
+  css:
+    theme:
+      https:&#x2F;&#x2F;maxcdn.bootstrapcdn.com&#x2F;font-awesome&#x2F;4.5.0&#x2F;css&#x2F;font-awesome.min.css: &#123; type: external, minified: true &#125;</code></pre>
+
+<blockquote>
+<p>具有自定义属性的Bootstrap CDN CSS的示例。</p>
+</blockquote>
+<pre><code class="hljs plain">bootstrap-cdn:
+  remote: getbootstrap.com
+  version: 4.0
+  license:
+    name: MIT
+    url: https:&#x2F;&#x2F;github.com&#x2F;twbs&#x2F;bootstrap&#x2F;blob&#x2F;master&#x2F;LICENSE
+  css:
+    theme:
+      &#39;https:&#x2F;&#x2F;maxcdn.bootstrapcdn.com&#x2F;bootstrap&#x2F;4.0.0&#x2F;css&#x2F;bootstrap.min.css&#39;:
+        type: external
+        minified: true
+        attributes:
+          crossorigin: anonymous
+          integrity: &quot;sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW&#x2F;dAiS6JXm&quot;</code></pre>
             </article>
             <hr>
             <div>
