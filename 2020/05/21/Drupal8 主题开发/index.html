@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="这是一个基于开源网站应用系统推荐和搭建指导的博客">
+  <meta name="author" content="大雄">
+  <meta name="keywords" content="andwww">
+  <title>Drupal8 主题开发 - AndWWW</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>AndWWW</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/2020-05-19/drupal-bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-05-21 15:01">
+                    2020年5月21日 下午
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    2.7k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    33
+                     分钟
+                  </span>
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
+                    <i class="iconfont icon-eye" aria-hidden="true"></i>
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h2 id="Drupal8-主题介绍"><a href="#Drupal8-主题介绍" class="headerlink" title="Drupal8 主题介绍"></a>Drupal8 主题介绍</h2><p>主题是定义视图层的文件的集合。您还可以在一个主题上创建一个或多个“子主题”或变体。需要配置 <strong>主题名.info.yml</strong> 文件。</p>
+<h3 id="主题工作流程"><a href="#主题工作流程" class="headerlink" title="主题工作流程"></a>主题工作流程</h3><p><img src="/img/2020-05-20/drupal_theming.jpg" srcset="/img/loading.gif" alt="Drupal8主题工作流程"></p>
+<h3 id="主题位置"><a href="#主题位置" class="headerlink" title="主题位置"></a>主题位置</h3><p><strong>必须将主题放置在Drupal项目目录下的“themes”文件夹中</strong>,Drupal核心主题（例如Bartik和Seven）位于Drupal项目目录下的<strong>core / themes</strong>文件夹中。</p>
+<ul>
+<li><p>官方推荐<br>将贡献的主题（第三方主题）放在名为 <strong>“ contrib”</strong> 的子文件夹中，而将自己的主题放在名为 <strong>“ custom”</strong> 的文件夹中。</p>
+<p>每个单独的主题都包含在以主题本身命名的目录中。例如 ** fluffiness/**。名称必须全部小写，以字母开头，并使用下划线（_）代替空格。</p>
+</li>
+<li><p>Drupal安装的（部分）结构如下所示：</p>
+</li>
+</ul>
+<pre><code class="hljs plain">|-core
+|  |-modules
+|  |-themes
+|  |  |-bartik
+|  |  |-seven
+..
+|-modules
+|-themes
+|  |-contrib
+|  |  |-zen
+|  |  |-basic
+|  |  |-bluemarine
+|  |-custom
+|  |  |-fluffiness</code></pre>
+
+<h3 id="主题文件夹结构"><a href="#主题文件夹结构" class="headerlink" title="主题文件夹结构"></a>主题文件夹结构</h3><p>典型主题文件夹结构中找到的文件和文件夹的示例：</p>
+<pre><code class="hljs plain">fluffiness
+  |-fluffiness.breakpoints.yml
+  |-fluffiness.info.yml
+  |-fluffiness.libraries.yml
+  |-fluffiness.theme
+  |-config
+  |  |-install
+  |  |  |-fluffiness.settings.yml
+  |  |-schema
+  |  |  |-fluffiness.schema.yml
+  |-css
+  |  |-style.css
+  |-js
+  |  |-fluffiness.js
+  |-images
+  |  |-buttons.png
+  |-logo.svg
+  |-screenshot.png
+  |-templates
+  |  |-maintenance-page.html.twig
+  |  |-node.html.twig</code></pre>
+
+<h3 id="常见主题文件的描述（-代表主题名）"><a href="#常见主题文件的描述（-代表主题名）" class="headerlink" title="常见主题文件的描述（*代表主题名）"></a>常见主题文件的描述（*代表主题名）</h3><blockquote>
+<p>*.info.yml<br>主题必须包含 *.info.yml文件才能定义主题。 *.info.yml文件尤其定义了元数据，库和块区域。这是主题中唯一需要的文件。</p>
+</blockquote>
+<blockquote>
+<p>*.libraries.yml<br>该 *.libraries.yml文件是用来定义JavaScript和CSS库，可以通过主题加载。</p>
+</blockquote>
+<blockquote>
+<p>*.breakpoints.yml<br>断点定义了响应式设计需要更改的位置，以响应不同的设备。断点在 *.breakpoints.yml文件中定义。</p>
+</blockquote>
+<blockquote>
+<p>*.theme<br>*.theme文件是一个PHP文件，其中包含输出的所有条件逻辑和数据（预处理）。它还可以扩展基本主题设置。创建高级主题设置。</p>
+</blockquote>
+<blockquote>
+<p>CSS/<br>最好将.css文件存储在“ css”子文件夹中。Drupal 8核心主题遵循<a href="https://www.kancloud.cn/avalons/rsys/520693" target="_blank" rel="noopener">SMACSS</a>样式指南来组织CSS文件。要使主题加载CSS文件，必须在 *.libraries.yml文件中定义它们，并且可以在 *.info.yml文件中覆盖或删除它们。</p>
+</blockquote>
+<blockquote>
+<p>js /<br>特定于主题的JavaScript文件存储在“ js”文件夹中。要使主题加载JavaScript文件，必须在 *.libraries.yml文件中定义它们。</p>
+</blockquote>
+<blockquote>
+<p>images/<br>优良作法是将图像存储在“images”子文件夹中。</p>
+</blockquote>
+<blockquote>
+<p>screenshot.png<br>如果在主题文件夹中找到screenshot.png文件，那么它将在“外观”页面上使用。或者，您可以在 *.info.yml文件中定义屏幕截图。</p>
+</blockquote>
+<blockquote>
+<p>logo.svg<br>如果在主题文件夹中找到了主题徽标的SVG矢量文件，则可以在网站标题中使用它。徽标也可以在上载。Appearance &gt; Settings</p>
+</blockquote>
+<blockquote>
+<p>templates/<br>模板提供HTML标记和一些表示逻辑。与Drupal 7相反，在Drupal 8中，模板文件（*.html.twig文件）必须存储在“ templates”子文件夹中。如果遵循特定的命名约定，则Drupal将用您提供的模板替换默认的核心模板，从而允许您覆盖默认的标记。您还可以在子文件夹中组织模板，例如，”templates/block” 中的所有块模板以及”templates/views”中的所有视图模板。</p>
+</blockquote>
+<h3 id="核心主题Bartik文件夹结构"><a href="#核心主题Bartik文件夹结构" class="headerlink" title="核心主题Bartik文件夹结构"></a>核心主题Bartik文件夹结构</h3><pre><code class="hljs plain">bartik
+  |-bartik.breakpoints.yml
+  |-bartik.info.yml
+  |-bartik.libraries.yml
+  |-bartik.theme
+  |-color
+  |  |-color.inc
+  |  |-preview.css
+  |  |-preview.html
+  |  |-preview.js
+  |-config
+  |  |-schema
+  |  |  |-bartik.schema.yml
+  |-css
+  |  |-colors.css
+  |  |-layout.css
+  |  |-maintenance-page.css
+  |  |-print.css
+  |-images
+  |  |-add.png
+  |  |-required.svg
+  |  |-tabs-border.png
+  |-logo.svg
+  |-screenshot.png
+  |-templates
+  |  |-block--search-form-block.html.twig
+  |  |-block--system-branding-block.html.twig
+  |  |-block--system-menu-block.html.twig
+  |  |-block.html.twig
+  |  |-comment.html.twig
+  |  |-field--taxonomy-term-reference.html.twig
+  |  |-maintenance-page.html.twig
+  |  |-node.html.twig
+  |  |-page.html.twig
+  |  |-status-messages.html.twig</code></pre>
+
+<hr>
+<h2 id="Drupal8-主题开发"><a href="#Drupal8-主题开发" class="headerlink" title="Drupal8 主题开发"></a>Drupal8 主题开发</h2><h3 id="使用-主题名-info-yml-文件定义主题"><a href="#使用-主题名-info-yml-文件定义主题" class="headerlink" title="使用 主题名.info.yml 文件定义主题"></a>使用 主题名.info.yml 文件定义主题</h3><p>要创建Drupal 8主题，您需要首先创建一个 <strong>主题名.info.yml</strong>文件，该文件向Drupal提供有关您主题设计的元数据。注意，将文件中的类型(“ type”)设置为“ theme”。</p>
+<h4 id="创建一个-主题名-info-yml-文件"><a href="#创建一个-主题名-info-yml-文件" class="headerlink" title="创建一个 主题名.info.yml 文件"></a>创建一个 主题名.info.yml 文件</h4><p>在<a href="https://www.drupal.org/node/2349803" target="_blank" rel="noopener">主题文件夹</a>的根目录中创建 <strong>主题名.info.yml</strong> 文件。该文件夹应与 <strong>.info.yml</strong> 文件具有相同的名称。</p>
+<p><strong>注意：</strong> <a href="https://symfony.com/doc/current/components/yaml/yaml_format.html" target="_blank" rel="noopener">YAML文件结构</a>写作规范</p>
+<blockquote>
+<p>案例</p>
+</blockquote>
+<pre><code class="hljs plain">name: Fluffiness
+type: theme
+description: &#39;A cuddly theme that offers extra fluffiness.&#39;
+core: 8.x
+libraries:
+  - fluffiness&#x2F;global-styling
+base theme: classy
+regions:
+  header: Header
+  content: Content
+  sidebar_first: &#39;Sidebar first&#39;
+  footer: Footer</code></pre>
+<blockquote>
+<p>键值对</p>
+</blockquote>
+<ul>
+<li>name (名称（必填）)<br>易读的名称。这将显示在激活主题的“外观”页面上。<pre><code class="hljs plain">name: Fluffiness</code></pre></li>
+<li>type (类型（必填）)<br>指示扩展名的类型，即“module”，“theme”或“profile”。对于主题，应始终将其设置为“theme”。此值区分大小写。<pre><code class="hljs plain">type: theme</code></pre></li>
+<li>description (说明（可选）)<br>描述，显示在“外观”页面上。<pre><code class="hljs plain">description: 一个有灰色和蓝色两种额外可爱的Drupal主题.</code></pre></li>
+<li>package (包装（可选）)<br>指定一个“包”，使您可以将主题分组在一起。<pre><code class="hljs plain">package: Core</code></pre></li>
+<li>core (核心（必填）)<br>指定主题兼容的Drupal核心的版本。<pre><code class="hljs plain">core: 8.x</code></pre></li>
+<li>php (php （可选）)<br>所需的最低PHP版本。默认为DRUPAL_MINIMUM_PHP常量值。<pre><code class="hljs plain">php: 5.5.9</code></pre></li>
+<li>version (版本（可选）)<br>指定版本。对于drupal.org上托管的主题，版本号将由打包脚本填写。不要手动指定它，也不要完全忽略版本行。<pre><code class="hljs plain">version: 8.x-1.0</code></pre></li>
+<li>libraries (库（可选）)<br>要添加到主题处于活动状态的所有页面的列表库（可以包含CSS和JavaScript加载资源）【<a href="https://www.drupal.org/node/2216195" target="_blank" rel="noopener">阅读有关主题和资产库的更多信息</a>】<pre><code class="hljs plain">libraries:
+  - fluffiness&#x2F;global-styling</code></pre></li>
+<li>libraries-override (覆盖库（可选）)<br>要覆盖的库和资源的集合。【<a href="https://www.drupal.org/node/2216195#override-extend" target="_blank" rel="noopener">在覆盖和扩展库中阅读更多内容</a>】。<pre><code class="hljs plain">libraries-override:
+  contextual&#x2F;drupal.contextual-links:
+    css:
+      component:
+        &#x2F;core&#x2F;themes&#x2F;stable&#x2F;css&#x2F;contextual&#x2F;contextual.module.css: false</code></pre></li>
+<li>libraries-extend (扩展库（可选）)<br>可在附加库添加的库和资源集合。【<a href="https://www.drupal.org/node/2216195#override-extend" target="_blank" rel="noopener">在覆盖和扩展库中阅读更多内容</a>】。<pre><code class="hljs plain">libraries-extend:
+  core&#x2F;drupal.user: 
+    - classy&#x2F;user1
+    - classy&#x2F;user2</code></pre></li>
+<li>base theme (基本主题（推荐）)<br>通过将主题指定为基本主题，主题可以从另一个主题继承资源。–它能让你的主题在继承核心主题时，主题修改更容易。<pre><code class="hljs plain">base theme: classy</code></pre></li>
+<li>hidden (隐藏（可选）)<br>指是否从“外观”页面隐藏主题，以便无法通过UI启用/禁用主题。<pre><code class="hljs plain">hidden: true</code></pre></li>
+<li>engine (引擎（可选）)<br>主题引擎. 默认为”twig”.<pre><code class="hljs plain">engine: twig</code></pre></li>
+<li>logo (品牌图标（可选）)<br><strong>在8.6.x中引入</strong><br>品牌图标相对于主题文件的路径。默认情况下，Drupal将在主题文件夹的根目录中查找名为“ logo.svg”的文件，并将其用作主题的品牌图标<pre><code class="hljs plain">logo: images&#x2F;logo.png</code></pre></li>
+<li>screenshot (主题展示缩略图（可选）)<br>主题展示缩略图相对于主题文件的路径。主题展示缩略图应以宽588像素和高438像素的格式显示。默认情况下，Drupal将在主题文件夹的根目录中查找名为“ screenshot.png”的文件，并将其用作“外观”页面上的主题图像。 <pre><code class="hljs plain">screenshot: fluffiness.png</code></pre></li>
+<li>regions (区域（可选）)<br>主题区域列表。（请注意，区域键前面没有破折号。）content需要一个区域。<a href="https://www.drupal.org/node/2469113" target="_blank" rel="noopener">阅读有关将区域添加到主题的更多信息</a>。<pre><code class="hljs plain">regions:
+  header: Header
+  content: Content
+  sidebar_first: &#39;First sidebar&#39;</code></pre></li>
+<li>regions_hidden (区域隐藏 （可选）)<br>要删除的继承区域列表。<pre><code class="hljs plain">regions_hidden:
+  - sidebar_last</code></pre></li>
+<li>features (功能（可选）)<br>要在主题“设置”页面上显示的功能列表。<pre><code class="hljs plain">features:
+  - comment_user_verification
+  - comment_user_picture
+  - favicon
+  - logo
+  - node_user_picture</code></pre></li>
+<li>stylesheets-remove (样式表删除（不建议使用）)<br>其他模块或主题的样式表列表，可从处于活动状态的所有页面中删除。每个值都必须是相对于docroot的完整路径，以在存在多个同名文件时解决歧义。如果文件是属于模块或主题的库的一部分，@module_or_theme_name则可以使用表单中的令牌代替完整路径。请注意，在使用令牌时，必须用引号将其引号，因为“ @”是YAML中的保留指示符。</li>
+<li><em>注意：*</em>该密钥已被弃用，并将在Drupal 9中删除。在大多数情况下，应使用<pre><code class="hljs plain">stylesheets-remove:
+  - core&#x2F;assets&#x2F;vendor&#x2F;normalize-css&#x2F;normalize.css
+  - &#39;@classy&#x2F;css&#x2F;components&#x2F;tabs.css&#39;</code></pre></li>
+<li>ckeditor_stylesheets (编辑器样式表 （可选）)<br>要添加到CKEditor框架的样式表列表。<pre><code class="hljs plain">ckeditor_stylesheets:
+  - https:&#x2F;&#x2F;fonts.googleapis.com&#x2F;css?family&#x3D;Open+Sans
+  - css&#x2F;base&#x2F;elements.css</code></pre>
+
+</li>
+</ul>
+<h3 id="主题添加区域"><a href="#主题添加区域" class="headerlink" title="主题添加区域"></a>主题添加区域</h3><ul>
+<li>将区域元数据添加到 <strong>主题名.info.yml</strong> 文件。</li>
+<li>在新添加的主题中添加并编辑 <strong>page.html.twig</strong> 文件。</li>
+</ul>
+<p><strong>注意：</strong> 如果您在主题中声明了任何区域，甚至仅声明了一个，所有默认区域都将不再应用，你需要声明将要使用的所有区域。  </p>
+<h4 id="将区域添加到-主题名-info-yml-文件"><a href="#将区域添加到-主题名-info-yml-文件" class="headerlink" title="将区域添加到 主题名.info.yml 文件"></a>将区域添加到 <strong>主题名.info.yml</strong> 文件</h4><p>首先在 <strong>主题名.info.yml</strong>文件中声明所有新区域。regions像这样将区域声明为键的子级(域键应为字母数字，并可以包含下划线（_）)：</p>
+<pre><code class="hljs plain">regions:
+  header: &#39;Header&#39;
+  content: &#39;Content&#39;
+  footer: &#39;Footer&#39;</code></pre>
+<h4 id="将区域添加到模板"><a href="#将区域添加到模板" class="headerlink" title="将区域添加到模板"></a>将区域添加到模板</h4><p>为了使区域显示放置在其中的任何内容，您需要确保新区域也已添加到 <strong>主题名.info.yml</strong>文件中。区域将表示为Twig变量，其名称与 <strong>主题名.info.yml</strong>文件中使用的键相对应.</p>
+<blockquote>
+<p>例子</p>
+</blockquote>
+<pre><code class="hljs plain">header: &#39;Header&#39;</code></pre>
+<blockquote>
+<p>…会变成：</p>
+</blockquote>
+<pre><code class="hljs plain">&#123;&#123; page.header &#125;&#125;</code></pre>
+<p>它们的行为与任何其他Twig变量一样，并且可以包装在对您的用例有意义的任何标记中。</p>
+<ul>
+<li>默认区域</li>
+</ul>
+<p>有关默认区域的列表，请查阅<a href="https://api.drupal.org/api/drupal/core%21modules%21system%21templates%21page.html.twig/8.2.x" target="_blank" rel="noopener">page.html.twig文档</a>。</p>
+<ol>
+<li>page.header</li>
+<li>page.primary_menu</li>
+<li>page.secondary_menu</li>
+<li>page.highlighted</li>
+<li>page.help (动态帮助文本，主要用于管理页面)</li>
+<li>page.content (当前页面的主要内容)</li>
+<li>page.sidebar_first</li>
+<li>page.sidebar_second</li>
+<li>page.footer</li>
+<li>page.breadcrumb</li>
+</ol>
+<p><strong>如果您的主题未声明任何区域，Drupal将采用这组默认值。</strong></p>
+<h4 id="Drupal主题添加样式表（CSS）和JavaScript（JS）"><a href="#Drupal主题添加样式表（CSS）和JavaScript（JS）" class="headerlink" title="Drupal主题添加样式表（CSS）和JavaScript（JS）"></a>Drupal主题添加样式表（CSS）和JavaScript（JS）</h4><p>Drupal使用高级原则：仅当您告诉Drupal应该加载资产时，才加载资产（CSS或JS）。Drupal不会在每个页面上加载所有资产，因为它会降低前端性能。</p>
+<ul>
+<li>加载CSS或JS资源过程：</li>
+</ul>
+<ol>
+<li>使用正确的命名约定和文件结构将CSS或JS保存到文件中。</li>
+<li>定义一个“库”，主题注册这些CSS / JS文件。</li>
+<li>通过预处理功能中的render元素将库“附加” 到所有页面，特定的Twig模板或目标特定的页面。</li>
+</ol>
+<ul>
+<li>定义库</li>
+</ul>
+<p>定义一个与主题名同名的 <strong>主题名.libraries.yml</strong> 文件，文件中的每一个条目都描述一个资源文件，如下所示：</p>
+<pre><code class="hljs plain"># fluffiness.libraries.yml
+cuddly-slider:
+  version: 1.x
+  css:
+    theme:
+      css&#x2F;cuddly-slider.css: &#123;&#125;
+  js:
+    js&#x2F;cuddly-slider.js: &#123;&#125;</code></pre>
+
+<ul>
+<li>声明依赖</li>
+</ul>
+<p>要声明依赖关系，所需的库以resource / library的形式声明。对于核心库，资源是core，对于其他库，资源是模块名称或主题名称。所以，如果  new_library依赖于jQuery的核心，  my_library中声明my_theme，并my_library宣布my_module，你会声明依赖关系：</p>
+<pre><code class="hljs plain"># fluffiness.libraries.yml
+new_library:
+  js:
+    js&#x2F;new_libary.js: &#123;&#125;
+  dependencies:
+    - core&#x2F;jquery
+    - my_module&#x2F;my_library
+    - my_theme&#x2F;my_library</code></pre>
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/drupal/">drupal</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/cms/">cms</a>
+                    
+                      <a class="hover-with-bg" href="/tags/php/">php</a>
+                    
+                      <a class="hover-with-bg" href="/tags/drupal8/">drupal8</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/21/Drupal8%20%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/">
+                        <span class="hidden-mobile">Drupal8 基本介绍</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div>
+    
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      总访客数 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Drupal8 主题开发&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
